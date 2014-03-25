@@ -1,0 +1,34 @@
+extends: [base_package]
+dependencies:
+  build: [lapack]
+
+sources:
+- url: https://github.com/JuliaLang/julia/archive/v0.2.0.tar.gz
+  key: tar.gz:ytwdhp5dnylwxspqv34e32mrw62vlms4
+
+build_stages:
+
+- name: make-configure
+  after: prologue
+  handler: bash
+  bash: |
+    make \
+        PREFIX=$ARTIFACT \
+        VERBOSE=1 \
+        USE_BLAS64=0 \
+        USE_SYSTEM_LLVM=1 \
+        USE_SYSTEM_ZLIB=1 \
+        USE_SYSTEM_SUITESPARSE=1 \
+        USE_SYSTEM_ARPACK=1 \
+        USE_SYSTEM_BLAS=1 \
+        USE_SYSTEM_FFTW=1 \
+        USE_SYSTEM_LAPACK=1 \
+        USE_SYSTEM_GMP=1 \
+        USE_SYSTEM_MPFR=1 \
+        USE_SYSTEM_PCRE=1 \
+        USE_SYSTEM_LIBUNWIND=1 \
+        USE_SYSTEM_READLINE=1 \
+        USE_SYSTEM_GRISU=1 \
+        USE_SYSTEM_OPENLIBM=1 \
+        USE_SYSTEM_RMATH=1 \
+        install
